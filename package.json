@@ -1,0 +1,41 @@
+{
+  "name": "weather-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:ui": "vitest",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.1",
+    "@mui/material": "^7.3.1",
+    "@reduxjs/toolkit": "^2.8.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.1",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vite": "^4.5.14",
+    "vitest": "^3.2.4"
+  }
+}
