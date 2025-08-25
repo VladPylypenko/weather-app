@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useHistoryList } from './useHistory'
 
-export function useSnackbarUndo() {
+const useSnackbarUndo = () => {
   const { lastRemoved, undo } = useHistoryList()
   const [open, setOpen] = useState(false)
 
@@ -12,3 +12,4 @@ export function useSnackbarUndo() {
   
   return { open, setOpen, onUndo, lastRemoved }
 }
+export { useSnackbarUndo }

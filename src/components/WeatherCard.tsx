@@ -3,7 +3,7 @@ import type { Weather } from '../types'
 
 type Props = { weather?: Weather; loading?: boolean; error?: string }
 
-export default function WeatherCard({ weather, loading, error }: Props) {
+const WeatherCard = ({ weather, loading, error }: Props) => {
   if (loading) return (<Card role="status" aria-busy="true"><CardContent><Typography variant="h6">Loading…</Typography></CardContent></Card>)
   
   if (error) return (<Card><CardContent><Typography variant="h6" color="error">Error</Typography><Typography>{error}</Typography></CardContent></Card>)
@@ -30,3 +30,4 @@ export default function WeatherCard({ weather, loading, error }: Props) {
     </Card>
   )
 }
+export default WeatherCard

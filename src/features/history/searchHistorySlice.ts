@@ -1,9 +1,12 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
 import { normalize } from '../../constants/txt'
 
-export type HistoryState = { items: string[]; lastRemoved?: { value: string; index: number } | null }
+export type HistoryState = {
+  items: string[]
+  lastRemoved?: { value: string; index: number } | null
+}
+
 const initialState: HistoryState = { items: [], lastRemoved: null }
 
 const slice = createSlice({
@@ -37,5 +40,5 @@ const slice = createSlice({
 export const { addCity, removeCity, clearHistory, undoRemove } = slice.actions
 export default slice.reducer
 
-export const selectHistory = (s: RootState) => s.history.items
-export const selectLastRemoved = (s: RootState) => s.history.lastRemoved
+export const selectHistory = (state: RootState) => state.history.items
+export const selectLastRemoved = (state: RootState) => state.history.lastRemoved

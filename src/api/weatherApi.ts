@@ -15,41 +15,42 @@ type WeatherApiForecastResponse = {
 
 const API = 'https://api.weatherapi.com/v1/forecast.json'
 
-export async function fetchCurrent(city: string): Promise<Weather> {
+const fetchCurrent = async (city: string): Promise<Weather> => {
   const key = (import.meta as any).env.VITE_WEATHER_API_KEY
-  const q = normalize(city)
+  const query = normalize(city)
   if (!key) throw new Error('Missing VITE_WEATHER_API_KEY env variable see README.md')
-  if (!q) throw new Error('Cant fetch weather for empty city')
+  if (!query) throw new Error('Cant fetch weather for empty city')
 
-  const url = `${API}?key=${key}&q=${encodeURIComponent(q)}&days=1&aqi=no&alerts=no`
+  const url = `${API}?key=${key}&q=${encodeURIComponent(query)}&days=1&aqi=no&alerts=no`
   const res = await fetch(url)
   if (!res.ok) {
     let errorMessage = res.status.toString()
     try {
-      const j = await res.json() as { error?: { message: string } }
-      errorMessage = j?.error?.message || errorMessage
+      const errorResponse = await res.json() as { error?: { message: string } }
+      errorMessage = errorResponse?.error?.message || errorMessage
     } catch {}
     throw new Error(errorMessage)
   }
-  const d = (await res.json()) as WeatherApiForecastResponse
-  const day = d.forecast?.forecastday?.[0]?.day
-  const min = day?.mintemp_c ?? d.current.temp_c
-  const max = day?.maxtemp_c ?? d.current.temp_c
+  const data = (await res.json()) as WeatherApiForecastResponse
+  const day = data.forecast?.forecastday?.[0]?.day
+  const min = day?.mintemp_c ?? data.current.temp_c
+  const max = day?.maxtemp_c ?? data.current.temp_c
 
   return {
-    city: d.location.name,
-    country: d.location.country,
-    temp: d.current.temp_c,
+    city: data.location.name,
+    country: data.location.country,
+    temp: data.current.temp_c,
     minTemp: min,
     maxTemp: max,
-    description: d.current.condition.text,
-    windSpeed: d.current.wind_kph,
-    iconUrl: normalizeIcon(d.current.condition.icon),
+    description: data.current.condition.text,
+    windSpeed: data.current.wind_kph,
+    iconUrl: normalizeIcon(data.current.condition.icon),
   }
 }
 
-function normalizeIcon(icon?: string) {
+const normalizeIcon = (icon?: string) => {
   if (!icon) return undefined
   return icon.startsWith('//') ? `https:${icon}` : icon
 }
 
+export { fetchCurrent, normalizeIcon }

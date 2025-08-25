@@ -3,14 +3,14 @@ import { Box, TextField } from '@mui/material'
 
 type Props = { onSearch: (city: string) => void }
 
-export default function SearchBar({ onSearch }: Props) {
+const SearchBar = ({ onSearch }: Props) => {
   const [value, setValue] = useState('')
 
-  const submit = (e: React.FormEvent) => { 
-    e.preventDefault()
-    const c = value.trim()
-    if (c.length) {
-      onSearch(c)
+  const submit = (event: React.FormEvent) => { 
+    event.preventDefault()
+    const city = value.trim()
+    if (city.length) {
+      onSearch(city)
     }
   }
   
@@ -23,3 +23,4 @@ export default function SearchBar({ onSearch }: Props) {
     </Box>
   )
 }
+export default SearchBar

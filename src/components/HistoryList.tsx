@@ -7,7 +7,7 @@ type Props = {
   onRemove: (city: string) => void 
 }
 
-export default function HistoryList({ items, onSelect, onRemove }: Props) {
+const HistoryList = ({ items, onSelect, onRemove }: Props) => {
   if (!items.length) {
     return <Typography color="text.secondary">No searches yet.</Typography>
   }
@@ -28,3 +28,4 @@ export default function HistoryList({ items, onSelect, onRemove }: Props) {
     </Box>
   )
 }
+export default HistoryList

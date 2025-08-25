@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { selectHistory, selectLastRemoved, removeCity, undoRemove } from '../features/history/searchHistorySlice'
 
-export function useHistoryList() {
+const useHistoryList = () => {
   const items = useAppSelector(selectHistory)
   const lastRemoved = useAppSelector(selectLastRemoved)
   
@@ -14,3 +14,4 @@ export function useHistoryList() {
     undo: () => dispatch(undoRemove()),
   }
 }
+export { useHistoryList }
